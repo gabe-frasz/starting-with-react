@@ -15,6 +15,18 @@ a {
   box-sizing: border-box;
 }
 
+html, body, #__next {
+  min-height: 100vh;
+  display: flex;
+  flex: 1;
+}
+#__next {
+  flex: 1;
+}
+#__next > * {
+  flex: 1;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
