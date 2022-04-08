@@ -29,6 +29,7 @@ export function Modal() {
 
                 <Box
                     tag="form"
+                    method="get"
                     className="w-full flex flex-col"
                     onSubmit={(event) => {
                         event.preventDefault();

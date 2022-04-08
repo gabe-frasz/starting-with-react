@@ -1,7 +1,15 @@
 export function Box({ tag, method, className, onSubmit, children }) {
     const Tag = tag ?? "div";
-    const fmethod = method ?? "get";
+    const fmethod = method ?? "";
     const submit = onSubmit ?? null;
+
+    if (!fmethod) {
+        return (
+            <Tag className={className} onSubmit={submit}>
+                {children}
+            </Tag>
+        );
+    }
 
     return (
         <Tag method={fmethod} className={className} onSubmit={submit}>
@@ -30,11 +38,13 @@ export function TextField({
     className,
     children,
     onChange,
+    onKeyPress,
 }) {
     const Tag = tag ?? "input";
     const tftype = type ?? "text";
     let tfvalue = value ?? "";
     const change = onChange ?? "";
+    const keyPress = onKeyPress ?? "";
 
     return (
         <Tag
@@ -43,6 +53,7 @@ export function TextField({
             placeholder={placeholder}
             className={className}
             onChange={change}
+            onKeyPress={onKeyPress}
         >
             {children}
         </Tag>
@@ -59,7 +70,7 @@ export function Button({ type, className, children }) {
     );
 }
 
-export function ProfileDesc({ className, children }) {
+export function ProfileDesc({ children }) {
     return (
         <Title className="w-fit px-2 py-1 text-sm bg-black rounded-full">
             {children}
