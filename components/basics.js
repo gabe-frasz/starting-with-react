@@ -1,12 +1,12 @@
-export function Box({ tag, method, dataKey, className, onSubmit, children }) {
+export function Box({ tag, method, datakey, className, onSubmit, children }) {
     const Tag = tag ?? "div";
     const fmethod = method ?? "";
     const submit = onSubmit ?? null;
-    const dKey = dataKey ?? null;
+    const dKey = datakey ?? null;
 
     if (!fmethod) {
         return (
-            <Tag dataKey={dKey} className={className} onSubmit={submit}>
+            <Tag datakey={dKey} className={className} onSubmit={submit}>
                 {children}
             </Tag>
         );

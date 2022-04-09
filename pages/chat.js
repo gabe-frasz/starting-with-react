@@ -27,7 +27,7 @@ export default function ChatPage() {
                 tag="main"
                 className="w-screen h-screen py-8 flex justify-center items-center bg-blue-900 text-slate-50"
             >
-                <Box className="w-4/5 h-full md:h-auto md:aspect-video px-4 py-8 flex flex-col bg-slate-800 rounded-md">
+                <Box className="w-4/5 h-full lg:h-auto lg:aspect-video px-4 py-8 flex flex-col bg-slate-800 rounded-md">
                     <Header />
 
                     <Box className=" p-4 flex-1 flex flex-col bg-slate-700 rounded-md overflow-y-hidden">
@@ -62,6 +62,7 @@ export default function ChatPage() {
                                 onClick={() => {
                                     updateMessagesList();
                                     setMessage("");
+                                    document.querySelector("input").focus();
                                 }}
                             >
                                 <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z" />
@@ -98,7 +99,7 @@ function MessageList(props) {
                         <Box
                             tag="li"
                             key={el.id}
-                            dataKey={el.id}
+                            datakey={el.id}
                             className="my-1 py-1 hover:px-1 hover:bg-slate-600 rounded-md"
                         >
                             <Box className="flex justify-between items-center">
