@@ -40,7 +40,7 @@ export default function ChatPage() {
                             <TextField
                                 value={message}
                                 placeholder="Insira sua mensagem aqui..."
-                                className="px-2 py-3 flex-1 bg-slate-800 rounded-md"
+                                className="w-12 px-2 py-3 flex-1 bg-slate-800 rounded-md"
                                 onChange={(event) => {
                                     setMessage(event.target.value);
                                 }}
@@ -57,7 +57,7 @@ export default function ChatPage() {
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="currentColor"
-                                className="bi bi-send-fill w-8 ml-6 mr-2 fill-slate-300 cursor-pointer"
+                                className="bi bi-send-fill w-6 md:w-8 ml-6 mr-2 fill-slate-300 cursor-pointer"
                                 viewBox="0 0 16 16"
                                 onClick={() => {
                                     updateMessagesList();
