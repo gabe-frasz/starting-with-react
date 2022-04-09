@@ -26,12 +26,12 @@ export default function ChatPage() {
         <>
             <Box
                 tag="main"
-                className="w-screen h-full flex justify-center items-center bg-blue-900 text-slate-50"
+                className="w-screen h-full py-8 flex justify-center items-center bg-blue-900 text-slate-50"
             >
-                <Box className="w-4/5 px-4 py-8 bg-slate-800 rounded-md">
+                <Box className="w-4/5 h-full md:h-auto md:aspect-video px-4 py-8 flex flex-col bg-slate-800 rounded-md">
                     <Header />
 
-                    <Box className="h-96 p-4 flex flex-col bg-slate-700 rounded-md">
+                    <Box className=" p-4 flex-1 flex flex-col bg-slate-700 rounded-md">
                         <MessageList msg={messagesList} />
 
                         <TextField
@@ -72,43 +72,45 @@ function Header() {
 
 function MessageList(props) {
     return (
-        <Box
-            tag="ul"
-            className="w-full h-full flex flex-col-reverse justify-start overflow-y-scroll"
-        >
-            {props.msg.map((el) => {
-                return (
-                    <>
-                        <Box
-                            tag="li"
-                            key={el.id}
-                            className="my-1 py-1 hover:px-1 hover:bg-slate-600 rounded-md"
-                        >
-                            <Box className="flex items-center">
-                                <Box className="relative w-8 aspect-square mr-2">
-                                    <Image
-                                        src={`https://github.com/slyCooper-n.png`}
-                                        alt="user picture"
-                                        layout="fill"
-                                        className="rounded-full"
-                                        priority
-                                    />
+        <>
+            <Box
+                tag="ul"
+                className="w-full h-full flex flex-col-reverse justify-start overflow-y-scroll"
+            >
+                {props.msg.map((el) => {
+                    return (
+                        <>
+                            <Box
+                                tag="li"
+                                key={el.id}
+                                className="my-1 py-1 hover:px-1 hover:bg-slate-600 rounded-md"
+                            >
+                                <Box className="flex items-center">
+                                    <Box className="relative w-8 aspect-square mr-2">
+                                        <Image
+                                            src={`https://github.com/slyCooper-n.png`}
+                                            alt="user picture"
+                                            layout="fill"
+                                            className="rounded-full"
+                                            priority
+                                        />
+                                    </Box>
+
+                                    <Text className="mr-2 text-slate-400">
+                                        {el.from}
+                                    </Text>
+
+                                    <Text className="text-xs text-slate-400">
+                                        {el.date}
+                                    </Text>
                                 </Box>
 
-                                <Text className="mr-2 text-slate-400">
-                                    {el.from}
-                                </Text>
-
-                                <Text className="text-xs text-slate-400">
-                                    {el.date}
-                                </Text>
+                                <Text className="mt-2">{el.text}</Text>
                             </Box>
-
-                            <Text className="mt-2">{el.text}</Text>
-                        </Box>
-                    </>
-                );
-            })}
-        </Box>
+                        </>
+                    );
+                })}
+            </Box>
+        </>
     );
 }

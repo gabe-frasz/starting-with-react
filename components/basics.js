@@ -43,8 +43,8 @@ export function TextField({
     const Tag = tag ?? "input";
     const tftype = type ?? "text";
     let tfvalue = value ?? "";
-    const change = onChange ?? "";
-    const keyPress = onKeyPress ?? "";
+    const change = onChange ?? null;
+    const keyPress = onKeyPress ?? null;
 
     return (
         <Tag

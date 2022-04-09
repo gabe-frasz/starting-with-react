@@ -58,7 +58,7 @@ export default function Modal() {
             <Box
                 className={`w-full md:w-1/3 p-4 flex flex-col justify-center items-center bg-slate-900 border-2 border-black rounded-md`}
             >
-                <Box className="img-login relative w-3/4 aspect-square mb-4 rounded-full">
+                <Box className="relative w-3/4 aspect-square mb-4 rounded-full">
                     <Image
                         src={
                             imgError
