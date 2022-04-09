@@ -25,7 +25,7 @@ export default function ChatPage() {
         <>
             <Box
                 tag="main"
-                className="w-screen h-full py-8 flex justify-center items-center bg-blue-900 text-slate-50"
+                className="w-screen h-screen py-8 flex justify-center items-center bg-blue-900 text-slate-50"
             >
                 <Box className="w-4/5 h-full md:h-auto md:aspect-video px-4 py-8 flex flex-col bg-slate-800 rounded-md">
                     <Header />
@@ -112,12 +112,16 @@ function MessageList(props) {
                                             priority
                                         />
                                     </Box>
-                                    <Text className="mr-2 text-slate-400">
-                                        {el.from}
-                                    </Text>
-                                    <Text className="text-xs text-slate-400">
-                                        {el.date}
-                                    </Text>
+
+                                    <Box className="flex flex-col md:flex-row">
+                                        <Text className="mr-2 text-slate-400">
+                                            {el.from}
+                                        </Text>
+
+                                        <Text className="text-xs text-slate-400">
+                                            {el.date}
+                                        </Text>
+                                    </Box>
                                 </Box>
 
                                 <svg
