@@ -17,3 +17,7 @@ ul::-webkit-scrollbar {
 ul li {
     overflow-wrap: break-word;
 }
+
+li:hover svg {
+    opacity: 1;
+}
