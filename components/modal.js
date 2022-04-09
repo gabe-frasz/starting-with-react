@@ -6,7 +6,7 @@ import { Box, Button, ProfileDesc, Text, TextField, Title } from "./basics";
 export default function Modal() {
     const [username, setUsername] = useState(""),
         router = useRouter(),
-        [imgError, setImgError] = useState(false),
+        [imgError, setImgError] = useState(true),
         fallbackImg =
             "https://ogimg.infoglobo.com.br/in/24440303-24f-31c/FT1086A/87996533_SCAtor-Daniel-Redcliff-como-Harry-Potter.-Foto-Divulgacao.jpg";
 
