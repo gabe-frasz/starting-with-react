@@ -1,7 +1,6 @@
 import { Box, Button, TextField, Title, Text } from "../components/basics";
 import Image from "next/dist/client/image";
 import { useState } from "react";
-import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 
 export default function ChatPage() {
