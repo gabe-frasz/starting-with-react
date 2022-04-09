@@ -10,6 +10,7 @@
         "gits": "git switch main && git merge sec && git push && git switch sec"
     },
     "dependencies": {
+        "@skynexui/components": "^1.25.0",
         "next": "12.1.4",
         "react": "18.0.0",
         "react-dom": "18.0.0"

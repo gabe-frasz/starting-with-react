@@ -3,25 +3,19 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { Box, Button, ProfileDesc, Text, TextField, Title } from "./basics";
 
-export function Modal() {
-    const [username, setUsername] = useState("slyCooper-n"),
+export default function Modal() {
+    const [username, setUsername] = useState(""),
         router = useRouter(),
-        [displayImage, setDisplayImage] = useState("block");
+        [imgError, setImgError] = useState(false),
+        fallbackImg =
+            "https://ogimg.infoglobo.com.br/in/24440303-24f-31c/FT1086A/87996533_SCAtor-Daniel-Redcliff-como-Harry-Potter.-Foto-Divulgacao.jpg";
 
-    let value, res, resJSON;
-
-    // async function getUserJSON() {
-    //     res = await fetch(`https://api.github.com/users/${value}`);
-    //     resJSON = await res.json();
-    //     if (resJSON.message) {
-    //         return resJSON.message;
-    //     }
-    // }
+    let value;
 
     return (
         <Box className="w-4/5 md:w-3/4 p-4 md:p-8 flex flex-col md:flex-row md:items-center text-center bg-slate-800 rounded-md">
             <Box className="mb-8 md:mr-8 flex-1">
-                <Title className="text-5xl font-semibold">Boas Vindas!</Title>
+                <Title className="text-5xl font-semibold">Welcome!</Title>
 
                 <Text className="mt-2 mb-8 text-slate-400">
                     Discord | Alura Potter
@@ -34,23 +28,21 @@ export function Modal() {
                     onSubmit={(event) => {
                         event.preventDefault();
 
+                        if (imgError) {
+                            return;
+                        }
+
                         router.push("/chat");
                     }}
                 >
                     <TextField
                         value={username}
-                        placeholder="Digite seu nome de usuário do Github"
+                        placeholder="Type your GitHub username..."
                         className="mb-2 px-1 py-2 bg-slate-900 rounded-md focus:outline-slate-50"
                         onChange={(event) => {
                             value = event.target.value;
                             setUsername(value);
-                            // getUserJSON();
-
-                            if (value.length < 3) {
-                                setDisplayImage("hidden");
-                                return;
-                            }
-                            setDisplayImage("block");
+                            setImgError(false);
                         }}
                     />
 
@@ -58,21 +50,28 @@ export function Modal() {
                         type="submit"
                         className="w-full py-2 bg-blue-900 rounded-md"
                     >
-                        Enviar
+                        Enter
                     </Button>
                 </Box>
             </Box>
 
             <Box
-                className={`w-full md:w-1/3 p-4 flex flex-col justify-center items-center bg-slate-900 border-2 border-black rounded-md ${displayImage}`}
+                className={`w-full md:w-1/3 p-4 flex flex-col justify-center items-center bg-slate-900 border-2 border-black rounded-md`}
             >
-                <Box className="relative w-3/4 aspect-square mb-4">
+                <Box className="img-login relative w-3/4 aspect-square mb-4 rounded-full">
                     <Image
-                        src={`https://github.com/${username}.png`}
+                        src={
+                            imgError
+                                ? fallbackImg
+                                : `https://github.com/${username}.png`
+                        }
                         alt="user picture"
                         layout="fill"
-                        className="rounded-full"
+                        className="rounded-full object-cover"
                         priority
+                        onError={() => {
+                            setImgError(true);
+                        }}
                     />
                 </Box>
 

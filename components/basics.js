@@ -53,7 +53,7 @@ export function TextField({
             placeholder={placeholder}
             className={className}
             onChange={change}
-            onKeyPress={onKeyPress}
+            onKeyPress={keyPress}
         >
             {children}
         </Tag>
