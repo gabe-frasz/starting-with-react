@@ -1,11 +1,28 @@
 import { Box, TextField, Title, Text } from "../components/basics";
 import Image from "next/dist/client/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { createClient } from "@supabase/supabase-js";
+import Head from "next/head";
+
+const SUPABASE_ANON_KEY =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1qZ2xhbnFpamthc3d6YXZjZmV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDk1MTc5NzQsImV4cCI6MTk2NTA5Mzk3NH0.1CNdpHcttvkxEgJazM0RylmyUcS6r0iLvKCSnSb5x9w",
+    SUPABASE_URL = "https://mjglanqijkaswzavcfez.supabase.co",
+    supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 export default function ChatPage() {
     const [message, setMessage] = useState(""),
         [messagesList, setMessagesList] = useState([]);
+
+    useEffect(() => {
+        supabaseClient
+            .from("messages")
+            .select("*")
+            .order("id", { ascending: false })
+            .then(({ data }) => {
+                setMessagesList(data);
+            });
+    }, []);
 
     function updateMessagesList() {
         if (message == "") {
@@ -13,16 +30,31 @@ export default function ChatPage() {
         }
 
         const newMessage = {
-            id: messagesList.length + 1,
             from: "slyCooper-n",
-            date: `${new Date().getDay()}/${new Date().getMonth()}/${new Date().getFullYear()}`,
             text: message,
         };
-        setMessagesList([newMessage, ...messagesList]);
+
+        supabaseClient
+            .from("messages")
+            .insert([newMessage])
+            .then((res) => {
+                setMessagesList([res.data[0], ...messagesList]);
+            });
     }
 
     return (
         <>
+            <Head>
+                <meta charset="utf-8" />
+                <title>Alura Potter | Chat</title>
+                <meta
+                    name="description"
+                    content="My first project with React"
+                />
+                <link rel="icon" href="/favicon.ico" />
+                <meta name="theme-color" content="#1e3a8a" />
+            </Head>
+
             <Box
                 tag="main"
                 className="w-screen h-screen py-8 flex justify-center items-center bg-blue-900 text-slate-50"
@@ -106,7 +138,7 @@ function MessageList(props) {
                                 <Box className="flex items-center">
                                     <Box className="relative w-8 aspect-square mr-2">
                                         <Image
-                                            src={`https://github.com/slyCooper-n.png`}
+                                            src={`https://github.com/${el.from}.png`}
                                             alt="user picture"
                                             layout="fill"
                                             className="rounded-full"
@@ -114,13 +146,13 @@ function MessageList(props) {
                                         />
                                     </Box>
 
-                                    <Box className="flex flex-col md:flex-row">
+                                    <Box className="flex flex-col justify-center items-center md:flex-row">
                                         <Text className="mr-2 text-slate-400">
                                             {el.from}
                                         </Text>
 
                                         <Text className="text-xs text-slate-400">
-                                            {el.date}
+                                            {el.created_at}
                                         </Text>
                                     </Box>
                                 </Box>
@@ -130,17 +162,17 @@ function MessageList(props) {
                                     fill="currentColor"
                                     className="bi bi-x-circle-fill w-4 mr-2 fill-slate-300 hover:fill-slate-400 opacity-0 cursor-pointer"
                                     viewBox="0 0 16 16"
-                                    onClick={(event) => {
-                                        let arrFilter = props.msg.filter(
-                                            (li) =>
-                                                li.id !=
-                                                event.target
-                                                    .closest("li")
-                                                    .getAttribute("dataKey")
-                                        );
+                                    // onClick={(event) => {
+                                    //     let arrFilter = props.msg.filter(
+                                    //         (li) =>
+                                    //             li.id !=
+                                    //             event.target
+                                    //                 .closest("li")
+                                    //                 .getAttribute("dataKey")
+                                    //     );
 
-                                        props.state(arrFilter);
-                                    }}
+                                    //     props.state(arrFilter);
+                                    // }}
                                 >
                                     <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
                                 </svg>

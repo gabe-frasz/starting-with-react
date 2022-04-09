@@ -10,6 +10,7 @@
         "gits": "git switch main && git merge sec && git push && git switch sec"
     },
     "dependencies": {
+        "@supabase/supabase-js": "^1.33.3",
         "next": "12.1.4",
         "react": "18.0.0",
         "react-dom": "18.0.0"

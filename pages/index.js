@@ -7,7 +7,7 @@ export default function Home() {
         <>
             <Head>
                 <meta charset="utf-8" />
-                <title>Discord | Alura Potter</title>
+                <title>Alura Potter | Login</title>
                 <meta
                     name="description"
                     content="My first project with React"
