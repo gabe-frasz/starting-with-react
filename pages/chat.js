@@ -13,6 +13,15 @@ const SUPABASE_ANON_KEY =
     SUPABASE_URL = "https://mjglanqijkaswzavcfez.supabase.co",
     supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+function listenToNewMessages(addMessage) {
+    return supabaseClient
+        .from("messages")
+        .on("INSERT", (update) => {
+            addMessage(update.new);
+        })
+        .subscribe();
+}
+
 export default function ChatPage() {
     const [message, setMessage] = useState(""),
         [messagesList, setMessagesList] = useState([]),
@@ -30,7 +39,11 @@ export default function ChatPage() {
                 setMessagesList(data);
                 setLoaded(true);
             });
-    }, []);
+
+        listenToNewMessages((newData) => {
+            setMessagesList([newData, ...messagesList]);
+        });
+    });
 
     useEffect(() => {
         setHideSkeleton("hidden");
@@ -53,9 +66,7 @@ export default function ChatPage() {
         supabaseClient
             .from("messages")
             .insert([newMessage])
-            .then((res) => {
-                setMessagesList([res.data[0], ...messagesList]);
-            });
+            .then((res) => {});
     }
 
     return (

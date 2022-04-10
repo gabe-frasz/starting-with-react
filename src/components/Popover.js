@@ -35,7 +35,9 @@ const MyPopover = ({ onStickerClick }) => (
                                 key={i}
                                 className="relative w-auto aspect-square cursor-pointer"
                                 onClick={() => {
-                                    onStickerClick(el);
+                                    if (onStickerClick) {
+                                        onStickerClick(el);
+                                    }
                                 }}
                             >
                                 <Image
