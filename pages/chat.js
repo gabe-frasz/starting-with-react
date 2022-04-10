@@ -2,6 +2,7 @@ import { Box, TextField, Title, Text } from "../src/components/basics";
 import Image from "next/dist/client/image";
 import Head from "next/head";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { Skeleton } from "../src/components/skeleton";
@@ -16,7 +17,9 @@ export default function ChatPage() {
     const [message, setMessage] = useState(""),
         [messagesList, setMessagesList] = useState([]),
         [loaded, setLoaded] = useState(false),
-        [hideSkeleton, setHideSkeleton] = useState("block");
+        [hideSkeleton, setHideSkeleton] = useState("block"),
+        router = useRouter(),
+        loggedUser = router.query.username;
 
     useEffect(() => {
         supabaseClient
@@ -33,15 +36,19 @@ export default function ChatPage() {
         setHideSkeleton("hidden");
     }, [loaded]);
 
-    function updateMessagesList() {
-        if (message == "") {
+    function updateMessagesList(isSticker) {
+        if (message == "" && !isSticker) {
             return;
         }
 
         const newMessage = {
-            from: "slyCooper-n",
+            from: loggedUser,
             text: message,
         };
+
+        if (isSticker) {
+            newMessage.text = isSticker;
+        }
 
         supabaseClient
             .from("messages")
@@ -80,6 +87,7 @@ export default function ChatPage() {
 
                         <Box className="flex">
                             <TextField
+                                tabIndex={2}
                                 value={message}
                                 placeholder="Insira sua mensagem aqui..."
                                 className="w-12 px-2 py-3 flex-1 bg-slate-800 rounded-md"
@@ -97,9 +105,10 @@ export default function ChatPage() {
                             />
 
                             <svg
+                                tabIndex={3}
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="currentColor"
-                                className="bi bi-send-fill w-6 md:w-8 ml-6 mr-2 fill-slate-400 cursor-pointer"
+                                className="bi bi-send-fill w-6 md:w-8 ml-6 mr-2 fill-slate-400 cursor-pointer lg:hidden"
                                 viewBox="0 0 16 16"
                                 onClick={() => {
                                     updateMessagesList();
@@ -110,7 +119,11 @@ export default function ChatPage() {
                                 <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z" />
                             </svg>
 
-                            <MyPopover />
+                            <MyPopover
+                                onStickerClick={(sticker) => {
+                                    updateMessagesList(`:sticker: ${sticker}`);
+                                }}
+                            />
                         </Box>
                     </Box>
                 </Box>
@@ -125,7 +138,9 @@ function Header() {
             <Title className="text-2xl font-semibold">Chat</Title>
 
             <Link href="/" passHref={true}>
-                <a className="p-2 hover:bg-slate-600 rounded-md">Logout</a>
+                <a tabIndex={1} className="p-2 hover:bg-slate-600 rounded-md">
+                    Logout
+                </a>
             </Link>
         </Box>
     );
@@ -216,7 +231,18 @@ function MessageList({ msg, dskeleton, state }) {
                                 </svg>
                             </Box>
 
-                            <Text className="mt-2">{el.text}</Text>
+                            {el.text.startsWith(":sticker: ") ? (
+                                <div className="relative w-36 sm:w-52 lg:w-72 aspect-video">
+                                    <Image
+                                        src={el.text.replace(":sticker: ", "")}
+                                        alt=":sticker:"
+                                        layout="fill"
+                                        className="object-contain"
+                                    />
+                                </div>
+                            ) : (
+                                <Text className="mt-2">{el.text}</Text>
+                            )}
                         </Box>
                     </>
                 );

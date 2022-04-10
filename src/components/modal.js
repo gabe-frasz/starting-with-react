@@ -10,8 +10,6 @@ export default function Modal() {
         fallbackImg =
             "https://ogimg.infoglobo.com.br/in/24440303-24f-31c/FT1086A/87996533_SCAtor-Daniel-Redcliff-como-Harry-Potter.-Foto-Divulgacao.jpg";
 
-    let value;
-
     return (
         <Box className="w-4/5 md:w-3/4 p-4 md:p-8 flex flex-col md:flex-row md:items-center text-center bg-slate-800 rounded-md">
             <Box className="mb-8 md:mr-8 flex-1">
@@ -32,7 +30,7 @@ export default function Modal() {
                             return;
                         }
 
-                        router.push("/chat");
+                        router.push(`/chat?username=${username}`);
                     }}
                 >
                     <TextField
@@ -40,8 +38,7 @@ export default function Modal() {
                         placeholder="Type your GitHub username..."
                         className="mb-2 px-1 py-2 bg-slate-900 rounded-md focus:outline-slate-50"
                         onChange={(event) => {
-                            value = event.target.value;
-                            setUsername(value);
+                            setUsername(event.target.value);
                             setImgError(false);
                         }}
                     />

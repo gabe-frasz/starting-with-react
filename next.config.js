@@ -5,10 +5,11 @@ const nextConfig = {
         domains: [
             "github.com",
             "ogimg.infoglobo.com.br",
-            "2.bp.blogspot.com",
+            "media3.giphy.com",
+            "media0.giphy.com",
             "media1.giphy.com",
-            "c.tenor.com",
-            "i.pinimg.com",
+            "media4.giphy.com",
+            "media2.giphy.com",
         ],
     },
 };

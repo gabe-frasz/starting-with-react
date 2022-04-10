@@ -3,7 +3,7 @@ import Image from "next/image";
 import * as icon from "../../public/wand-icon.png";
 import * as obj from "../../config.json";
 
-const MyPopover = () => (
+const MyPopover = ({ onStickerClick }) => (
     <Popover.Root>
         <Popover.Trigger>
             <div className="relative w-6 aspect-square ml-4">
@@ -12,8 +12,8 @@ const MyPopover = () => (
         </Popover.Trigger>
 
         <Popover.Content side="top" alignOffset={-18}>
-            <div className="w-56 sm:w-72 md:w-96 p-4 bg-slate-900 text-slate-100 rounded-md overflow-y-scroll">
-                <div className="mb-4 flex flex-row-reverse justify-between">
+            <div className="w-56 sm:w-72 md:w-96 p-4 flex flex-col bg-slate-900 text-slate-100 rounded-md">
+                <div className="h-6 mb-4 flex flex-row-reverse justify-between">
                     <Popover.Close>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -28,18 +28,21 @@ const MyPopover = () => (
                     <h4 className="text-xl">Stickers</h4>
                 </div>
 
-                <div className="grid grid-cols-2 auto-rows-auto gap-2">
+                <div className="flex-1 grid grid-cols-2 lg:grid-cols-3 auto-rows-auto gap-4 overflow-y-scroll">
                     {obj.stickers.map((el, i) => {
                         return (
                             <div
                                 key={i}
-                                className="relative w-auto aspect-square"
+                                className="relative w-auto aspect-square cursor-pointer"
+                                onClick={() => {
+                                    onStickerClick(el);
+                                }}
                             >
                                 <Image
                                     src={el}
                                     alt={`sticker-${i}`}
                                     layout="fill"
-                                    className="object-cover"
+                                    className="object-cover rounded-md"
                                 />
                             </div>
                         );
@@ -48,13 +51,22 @@ const MyPopover = () => (
             </div>
 
             <style jsx>{`
-                div.w-56::-webkit-scrollbar {
+                div.w-56 {
+                    min-height: 200px;
+                    max-height: 60vh;
+                }
+                @media (min-width: 1024px) {
+                    div.w-56 {
+                        width: 500px;
+                    }
+                }
+                div.flex-1::-webkit-scrollbar {
                     width: 7px;
                 }
-                div.w-56::-webkit-scrollbar-track {
+                div.flex-1::-webkit-scrollbar-track {
                     background: transparent;
                 }
-                div.w-56::-webkit-scrollbar-thumb {
+                div.flex-1::-webkit-scrollbar-thumb {
                     background: #00000055;
                     border-radius: 3px;
                 }
