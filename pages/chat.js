@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { createClient } from "@supabase/supabase-js";
 import Head from "next/head";
+import { Skeleton } from "../components/skeleton";
 
 const SUPABASE_ANON_KEY =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1qZ2xhbnFpamthc3d6YXZjZmV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDk1MTc5NzQsImV4cCI6MTk2NTA5Mzk3NH0.1CNdpHcttvkxEgJazM0RylmyUcS6r0iLvKCSnSb5x9w",
@@ -12,7 +13,9 @@ const SUPABASE_ANON_KEY =
 
 export default function ChatPage() {
     const [message, setMessage] = useState(""),
-        [messagesList, setMessagesList] = useState([]);
+        [messagesList, setMessagesList] = useState([]),
+        [loaded, setLoaded] = useState(false),
+        [hideSkeleton, setHideSkeleton] = useState("block");
 
     useEffect(() => {
         supabaseClient
@@ -21,8 +24,13 @@ export default function ChatPage() {
             .order("id", { ascending: false })
             .then(({ data }) => {
                 setMessagesList(data);
+                setLoaded(true);
             });
     }, []);
+
+    useEffect(() => {
+        setHideSkeleton("hidden");
+    }, [loaded]);
 
     function updateMessagesList() {
         if (message == "") {
@@ -66,6 +74,7 @@ export default function ChatPage() {
                         <MessageList
                             msg={messagesList}
                             state={setMessagesList}
+                            dskeleton={hideSkeleton}
                         />
 
                         <Box className="flex">
@@ -119,13 +128,18 @@ function Header() {
     );
 }
 
-function MessageList(props) {
+function MessageList({ msg, dskeleton }) {
     return (
         <Box
             tag="ul"
             className="w-full flex-1 flex flex-col-reverse justify-start overflow-y-scroll"
         >
-            {props.msg.map((el) => {
+            {msg.map((el) => {
+                el.created_at = Array.from(el.created_at)
+                    .splice(0, 10)
+                    .join("")
+                    .replace("-", "/");
+
                 return (
                     <>
                         <Box
@@ -162,17 +176,32 @@ function MessageList(props) {
                                     fill="currentColor"
                                     className="bi bi-x-circle-fill w-4 mr-2 fill-slate-300 hover:fill-slate-400 opacity-0 cursor-pointer"
                                     viewBox="0 0 16 16"
-                                    // onClick={(event) => {
-                                    //     let arrFilter = props.msg.filter(
-                                    //         (li) =>
-                                    //             li.id !=
-                                    //             event.target
-                                    //                 .closest("li")
-                                    //                 .getAttribute("dataKey")
-                                    //     );
+                                    onClick={(event) => {
+                                        supabaseClient
+                                            .from("messages")
+                                            .delete({
+                                                returning: "representation",
+                                            })
+                                            .match({
+                                                id: event.target
+                                                    .closest("li")
+                                                    .getAttribute("datakey"),
+                                            })
+                                            .then(() => {
+                                                let arrFilter =
+                                                    props.msg.filter(
+                                                        (li) =>
+                                                            li.id !=
+                                                            event.target
+                                                                .closest("li")
+                                                                .getAttribute(
+                                                                    "dataKey"
+                                                                )
+                                                    );
 
-                                    //     props.state(arrFilter);
-                                    // }}
+                                                props.state(arrFilter);
+                                            });
+                                    }}
                                 >
                                     <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
                                 </svg>
@@ -183,6 +212,13 @@ function MessageList(props) {
                     </>
                 );
             })}
+
+            <Skeleton display={dskeleton} />
+            <Skeleton display={dskeleton} />
+            <Skeleton display={dskeleton} />
+            <Skeleton display={dskeleton} />
+            <Skeleton display={dskeleton} />
+            <Skeleton display={dskeleton} />
         </Box>
     );
 }
