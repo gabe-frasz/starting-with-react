@@ -1,7 +1,7 @@
 import * as Popover from "@radix-ui/react-popover";
 import Image from "next/image";
 import * as icon from "../../public/wand-icon.png";
-import * as obj from "../../config.json";
+import AppConfig from "../../config.json";
 
 const MyPopover = ({ onStickerClick }) => (
     <Popover.Root>
@@ -29,7 +29,7 @@ const MyPopover = ({ onStickerClick }) => (
                 </div>
 
                 <div className="flex-1 grid grid-cols-2 lg:grid-cols-3 auto-rows-auto gap-4 overflow-y-scroll">
-                    {obj.stickers.map((el, i) => {
+                    {AppConfig.stickers.map((el, i) => {
                         return (
                             <div
                                 key={i}
