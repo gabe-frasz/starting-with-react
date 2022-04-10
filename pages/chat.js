@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { Skeleton } from "../src/components/skeleton";
+import MyPopover from "../src/components/Popover";
 
 const SUPABASE_ANON_KEY =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1qZ2xhbnFpamthc3d6YXZjZmV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDk1MTc5NzQsImV4cCI6MTk2NTA5Mzk3NH0.1CNdpHcttvkxEgJazM0RylmyUcS6r0iLvKCSnSb5x9w",
@@ -98,7 +99,7 @@ export default function ChatPage() {
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="currentColor"
-                                className="bi bi-send-fill w-6 md:w-8 ml-6 mr-2 fill-slate-300 cursor-pointer"
+                                className="bi bi-send-fill w-6 md:w-8 ml-6 mr-2 fill-slate-400 cursor-pointer"
                                 viewBox="0 0 16 16"
                                 onClick={() => {
                                     updateMessagesList();
@@ -108,6 +109,8 @@ export default function ChatPage() {
                             >
                                 <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z" />
                             </svg>
+
+                            <MyPopover />
                         </Box>
                     </Box>
                 </Box>
