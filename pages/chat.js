@@ -1,10 +1,10 @@
-import { Box, TextField, Title, Text } from "../components/basics";
+import { Box, TextField, Title, Text } from "../src/components/basics";
 import Image from "next/dist/client/image";
 import Head from "next/head";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
-import { Skeleton } from "../components/skeleton";
+import { Skeleton } from "../src/components/skeleton";
 
 const SUPABASE_ANON_KEY =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1qZ2xhbnFpamthc3d6YXZjZmV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDk1MTc5NzQsImV4cCI6MTk2NTA5Mzk3NH0.1CNdpHcttvkxEgJazM0RylmyUcS6r0iLvKCSnSb5x9w",

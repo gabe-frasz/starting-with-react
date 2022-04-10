@@ -10,6 +10,7 @@
         "gits": "git switch main && git merge sec && git push && git switch sec"
     },
     "dependencies": {
+        "@radix-ui/react-popover": "^0.1.6",
         "@supabase/supabase-js": "^1.33.3",
         "next": "12.1.4",
         "react": "18.0.0",
