@@ -128,7 +128,7 @@ function Header() {
     );
 }
 
-function MessageList({ msg, dskeleton }) {
+function MessageList({ msg, dskeleton, state }) {
     return (
         <Box
             tag="ul"
@@ -188,17 +188,24 @@ function MessageList({ msg, dskeleton }) {
                                                     .getAttribute("datakey"),
                                             })
                                             .then(() => {
-                                                let arrFilter =
-                                                    props.msg.filter((li) => {
-                                                        li.id !=
-                                                            event.target
-                                                                .closest("li")
-                                                                .getAttribute(
-                                                                    "dataKey"
-                                                                );
-                                                    });
+                                                let arrFilter = msg.filter(
+                                                    (li) => {
+                                                        return (
+                                                            li.id !=
+                                                            Number(
+                                                                event.target
+                                                                    .closest(
+                                                                        "li"
+                                                                    )
+                                                                    .getAttribute(
+                                                                        "datakey"
+                                                                    )
+                                                            )
+                                                        );
+                                                    }
+                                                );
 
-                                                props.state(arrFilter);
+                                                state(arrFilter);
                                             });
                                     }}
                                 >

@@ -1,19 +1,16 @@
 export function Box({ tag, method, datakey, className, onSubmit, children }) {
-    const Tag = tag ?? "div";
-    const fmethod = method ?? "";
-    const submit = onSubmit ?? null;
-    const dKey = datakey ?? null;
-
-    if (!fmethod) {
-        return (
-            <Tag datakey={dKey} className={className} onSubmit={submit}>
-                {children}
-            </Tag>
-        );
-    }
+    const Tag = tag ?? "div",
+        fmethod = method ?? null,
+        submit = onSubmit ?? null,
+        dKey = datakey ?? null;
 
     return (
-        <Tag method={fmethod} className={className} onSubmit={submit}>
+        <Tag
+            datakey={dKey}
+            method={fmethod}
+            className={className}
+            onSubmit={submit}
+        >
             {children}
         </Tag>
     );
@@ -43,9 +40,9 @@ export function TextField({
 }) {
     const Tag = tag ?? "input";
     const tftype = type ?? "text";
-    let tfvalue = value ?? "";
     const change = onChange ?? null;
     const keyPress = onKeyPress ?? null;
+    let tfvalue = value ?? "";
 
     return (
         <Tag
