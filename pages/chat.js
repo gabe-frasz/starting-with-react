@@ -189,15 +189,14 @@ function MessageList({ msg, dskeleton }) {
                                             })
                                             .then(() => {
                                                 let arrFilter =
-                                                    props.msg.filter(
-                                                        (li) =>
-                                                            li.id !=
+                                                    props.msg.filter((li) => {
+                                                        li.id !=
                                                             event.target
                                                                 .closest("li")
                                                                 .getAttribute(
                                                                     "dataKey"
-                                                                )
-                                                    );
+                                                                );
+                                                    });
 
                                                 props.state(arrFilter);
                                             });
