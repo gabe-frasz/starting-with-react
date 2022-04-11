@@ -41,9 +41,12 @@ export default function ChatPage() {
             });
 
         listenToNewMessages((newData) => {
-            setMessagesList([newData, ...messagesList]);
+            // passar uma função para o setState para pegar o valor atual do state
+            setMessagesList((currentValue) => {
+                return [newData, ...currentValue];
+            });
         });
-    });
+    }, []);
 
     useEffect(() => {
         setHideSkeleton("hidden");
@@ -63,7 +66,12 @@ export default function ChatPage() {
             newMessage.text = isSticker;
         }
 
-        supabaseClient.from("messages").insert([newMessage]);
+        supabaseClient
+            .from("messages")
+            .insert(newMessage)
+            .then((res) => {
+                // console.log(res);
+            });
     }
 
     return (
