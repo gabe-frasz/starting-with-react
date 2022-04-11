@@ -63,10 +63,7 @@ export default function ChatPage() {
             newMessage.text = isSticker;
         }
 
-        supabaseClient
-            .from("messages")
-            .insert([newMessage])
-            .then((res) => {});
+        supabaseClient.from("messages").insert([newMessage]);
     }
 
     return (
