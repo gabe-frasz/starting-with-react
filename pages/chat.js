@@ -86,7 +86,7 @@ export default function ChatPage() {
                 tag="main"
                 className="w-screen h-screen py-8 flex justify-center items-center bg-blue-900 text-slate-50"
             >
-                <Box className="w-4/5 h-full lg:h-auto lg:aspect-video px-4 py-8 flex flex-col bg-slate-800 rounded-md">
+                <Box className="w-4/5 h-full lg:h-auto lg:aspect-video p-4 flex flex-col bg-slate-800 rounded-md">
                     <Header />
 
                     <Box className=" p-4 flex-1 flex flex-col bg-slate-700 rounded-md overflow-y-hidden">
