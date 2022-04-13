@@ -1,7 +1,6 @@
 import Head from "next/head";
 import { Box } from "../src/components/basics";
 import Modal from "../src/components/modal";
-import wall from "../public/wall.png";
 
 export default function Home() {
     return (
