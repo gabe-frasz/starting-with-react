@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { Box } from "../src/components/basics";
 import Modal from "../src/components/modal";
+import wall from "../public/wall.png";
 
 export default function Home() {
     return (
@@ -19,10 +20,7 @@ export default function Home() {
                     property="og:url"
                     content="https://starting-with-react-murex.vercel.app/"
                 />
-                <meta
-                    property="og:image"
-                    content="https://starting-with-react-murex.vercel.app/public/wall.png"
-                />
+                <meta property="og:image" content={wall} />
 
                 <link rel="icon" href="/favicon.ico" />
                 <meta name="theme-color" content="#1e3a8a" />
