@@ -20,7 +20,7 @@ export default function Home() {
                     property="og:url"
                     content="https://starting-with-react-murex.vercel.app/"
                 />
-                <meta property="og:image" content={wall} />
+                <meta property="og:image" content="../public/wall.png" />
 
                 <link rel="icon" href="/favicon.ico" />
                 <meta name="theme-color" content="#1e3a8a" />
