@@ -10,7 +10,7 @@ export default function Home() {
                 <title>Alura Potter | Login</title>
                 <meta
                     name="description"
-                    content="My first project with React"
+                    content="My first project with React, built with Alura and Dev Soutinho. Simple harry potter themed chat app"
                 />
 
                 <meta property="og:title" content="Aluracord | Alura Potter" />
@@ -19,7 +19,10 @@ export default function Home() {
                     property="og:url"
                     content="https://starting-with-react-murex.vercel.app/"
                 />
-                <meta property="og:image" content="/../public/wall.png" />
+                <meta
+                    property="og:image"
+                    content="https://starting-with-react-murex.vercel.app/public/wall.png"
+                />
 
                 <link rel="icon" href="/favicon.ico" />
                 <meta name="theme-color" content="#1e3a8a" />
