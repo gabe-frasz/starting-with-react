@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { Skeleton } from "../src/components/skeleton";
 import MyPopover from "../src/components/Popover";
+import MyHovercard from "../src/components/Hovercard";
 
 const SUPABASE_ANON_KEY =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1qZ2xhbnFpamthc3d6YXZjZmV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDk1MTc5NzQsImV4cCI6MTk2NTA5Mzk3NH0.1CNdpHcttvkxEgJazM0RylmyUcS6r0iLvKCSnSb5x9w",
@@ -27,6 +28,7 @@ export default function ChatPage() {
         [messagesList, setMessagesList] = useState([]),
         [loaded, setLoaded] = useState(false),
         [hideSkeleton, setHideSkeleton] = useState("block"),
+        [uData, setUData] = useState([]),
         router = useRouter(),
         loggedUser = router.query.username;
 
@@ -57,9 +59,22 @@ export default function ChatPage() {
             return;
         }
 
+        fetch(`https://api.github.com/users/${loggedUser}`)
+            .then((res) => {
+                return res.json();
+            })
+            .then((res) => {
+                let { name, login, bio, followers, public_repos } = res;
+                setUData([name, login, bio, followers, public_repos]);
+            });
+
         const newMessage = {
-            from: loggedUser,
+            from: uData[1],
             text: message,
+            name: uData[0],
+            bio: uData[2],
+            followers: uData[3],
+            repos: uData[4],
         };
 
         if (isSticker) {
@@ -184,15 +199,7 @@ function MessageList({ msg, dskeleton, state }) {
                         >
                             <Box className="flex justify-between items-center">
                                 <Box className="flex items-center">
-                                    <Box className="relative w-8 aspect-square mr-2">
-                                        <Image
-                                            src={`https://github.com/${el.from}.png`}
-                                            alt="user picture"
-                                            layout="fill"
-                                            className="rounded-full"
-                                            priority
-                                        />
-                                    </Box>
+                                    <MyHovercard user={el} />
 
                                     <Box className="flex flex-col justify-center items-center md:flex-row">
                                         <Text className="mr-2 text-slate-400">

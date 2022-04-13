@@ -12,6 +12,15 @@ export default function Home() {
                     name="description"
                     content="My first project with React"
                 />
+
+                <meta property="og:title" content="Aluracord | Alura Potter" />
+                <meta property="og:type" content="website" />
+                <meta
+                    property="og:url"
+                    content="https://starting-with-react-murex.vercel.app/"
+                />
+                <meta property="og:image" content="/../public/wall.png" />
+
                 <link rel="icon" href="/favicon.ico" />
                 <meta name="theme-color" content="#1e3a8a" />
             </Head>

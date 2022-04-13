@@ -30,7 +30,7 @@ export default function Modal() {
                             return;
                         }
 
-                        router.push(`/chat?username=${username}`);
+                        router.push(`/chat?username=${username.toLowerCase()}`);
                     }}
                 >
                     <TextField
