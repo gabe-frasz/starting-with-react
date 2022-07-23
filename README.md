@@ -40,4 +40,4 @@ On vercel: ~~https://starting-with-react-slycooper-n.vercel.app/~~ (paused)
 
 ## :memo: License
 
-[MIT License](https://github.com/SlyCooper-n/letmeask-nlw6-react/blob/main/LICENSE) &copy; [Gabriel VS Frasão](https://github.com/SlyCooper-n)
+[MIT License](https://github.com/SlyCooper-n/starting_with_react/blob/main/LICENSE) &copy; [Gabriel VS Frasão](https://github.com/SlyCooper-n)
