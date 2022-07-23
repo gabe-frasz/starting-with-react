@@ -17,7 +17,7 @@
 
 | Status | Project |
 | --- | --- |
-| ![Github deployments](https://img.shields.io/github/deployments/slycooper-n/starting_with_react/production?label=vercel&logo=vercel&logoColor=white) | [Site](https://letmeask-nlw6-react.vercel.app) |
+| ![Github deployments](https://img.shields.io/github/deployments/slycooper-n/starting_with_react/production?label=vercel&logo=vercel&logoColor=white) | [Site](https://starting-with-react-slycooper-n.vercel.app) |
 <br />
 
 <img src="./_docs/banner.png" alt="Alura Potter homepage banner" />
