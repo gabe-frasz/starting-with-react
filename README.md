@@ -1,6 +1,6 @@
 <div align="center">
 
-# Alura Potter
+# Alura Potter (paused)
 
 [![My Github](https://img.shields.io/badge/Gabe%20Frasz-Alura%20Potter-gold?style=flat-square)](https://github.com/SlyCooper-n)
 [![Repo version](https://img.shields.io/github/package-json/v/slycooper-n/starting_with_react?style=flat-square)](https://github.com/SlyCooper-n/starting_with_react/blob/main/package.json)
