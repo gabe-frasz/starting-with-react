@@ -36,10 +36,6 @@ Currently I'm planning to implement some of the concepts used here [in my own ap
 - [x] Stickers included
 - [x] Further user info displays when hovering over the avatar
 
-## :desktop_computer: Deploy
-
-On vercel: ~~https://starting-with-react-slycooper-n.vercel.app/~~ (paused)
-
 ## :memo: License
 
 [MIT License](https://github.com/SlyCooper-n/starting_with_react/blob/main/LICENSE) &copy; [Gabriel VS Frasão](https://github.com/SlyCooper-n)
